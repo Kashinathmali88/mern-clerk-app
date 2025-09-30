@@ -18,7 +18,7 @@ router.post(
 
       if (evt.type === "user.created") {
         await User.create({
-          clerkUserId: evt.data.id,
+          clerkId: evt.data.id,
           email: evt.data.email_addresses[0]?.email_address,
           firstName: evt.data.first_name,
           lastName: evt.data.last_name,
@@ -27,7 +27,7 @@ router.post(
 
       if (evt.type === "user.updated") {
         await User.findOneAndUpdate(
-          { clerkUserId: evt.data.id },
+          { clerkId: evt.data.id },
           {
             email: evt.data.email_addresses[0]?.email_address,
             firstName: evt.data.first_name,
