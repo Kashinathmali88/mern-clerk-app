@@ -40,6 +40,7 @@ router.post(
     } catch (err) {
       console.error("Webhook error:", err);
       res.status(400).json({ error: "Invalid webhook" });
+      process.exit(1);
     }
   }
 );

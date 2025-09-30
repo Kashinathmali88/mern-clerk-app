@@ -28,9 +28,10 @@ app.get("/api/protected", requireAuth(), (req, res) => {
   res.json({ message: "Protected route working", auth: req.auth });
 });
 
-// connect DB first, then start server
-connectDB().then(() => {
-  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-});
+// connect DB first, then start server/
+connectDB();
+// connectDB().then(() => {
+//   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// });
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
