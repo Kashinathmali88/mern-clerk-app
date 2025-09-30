@@ -12,9 +12,10 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
-app.use(express.json());
 app.use("/api/webhooks", router);
+// app.use(express.json());
 
 // MongoDB connection
 connectDB();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth, SignOutButton } from "@clerk/clerk-react";
 
 function Dashboard() {
   const { getToken } = useAuth();
@@ -20,11 +20,17 @@ function Dashboard() {
   return (
     <div>
       <h2>Dashboard</h2>
+
       {user ? (
         <>
           <p>Welcome, {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Role: {user.role}</p>
+
+          {/* Logout Button */}
+          <SignOutButton>
+            <button style={{ marginTop: "10px" }}>Logout</button>
+          </SignOutButton>
         </>
       ) : (
         <p>Loading user...</p>

@@ -11,7 +11,10 @@ router.post(
   async (req, res) => {
     try {
       const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
-      const evt = wh.verify(req.body, req.headers);
+      // const evt = wh.verify(req.body, req.headers);
+
+      const payload = req.body.toString("utf8"); // convert Buffer → string
+      const evt = wh.verify(payload, req.headers);
 
       if (evt.type === "user.created") {
         await User.create({
