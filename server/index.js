@@ -10,15 +10,13 @@ import { connectDB } from "./db.js";
 
 dotenv.config();
 
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
 app.use("/api/webhooks", router);
 // app.use(express.json());
-
-// MongoDB connection
-connectDB();
 
 // Public route
 app.get("/", (req, res) => {
@@ -30,5 +28,9 @@ app.get("/api/protected", requireAuth(), (req, res) => {
   res.json({ message: "Protected route working", auth: req.auth });
 });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// connect DB first, then start server
+connectDB().then(() => {
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+});
+
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
