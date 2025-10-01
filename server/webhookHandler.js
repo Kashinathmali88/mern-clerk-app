@@ -23,6 +23,8 @@ router.post(
           email: evt.data.email_addresses[0]?.email_address,
           firstName: evt.data.first_name,
           lastName: evt.data.last_name,
+          username: evt.data.username,
+          image: evt.data.image_url,
         });
       }
 
@@ -37,6 +39,10 @@ router.post(
             email: evt.data.email_addresses[0]?.email_address,
             firstName: evt.data.first_name,
             lastName: evt.data.last_name,
+            firstName: evt.data.first_name,
+            lastName: evt.data.last_name,
+            username: evt.data.username,
+            image: evt.data.image_url,
           },
           { new: true }
         );
