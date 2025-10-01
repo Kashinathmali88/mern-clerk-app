@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   SignedIn,
   SignedOut,
+  SignIn,
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
@@ -10,10 +11,16 @@ import Dashboard from "./Dashboard";
 
 function App() {
   return (
-    <div>
-      <h1>MERN + Clerk</h1>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <SignedOut>
-        <SignInButton />
+        <SignIn />
       </SignedOut>
       <SignedIn>
         <UserButton />
