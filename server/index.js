@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
-// app.use("/api/webhooks", router);
+app.use("/api/webhooks", router);
 // app.use(express.json());
 
 // Public route
