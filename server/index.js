@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
-app.use("/api/webhooks", router);
+// app.use("/api/webhooks", router);
 // app.use(express.json());
 
 // Public route
@@ -29,9 +29,21 @@ app.get("/api/protected", requireAuth(), (req, res) => {
 });
 
 // connect DB first, then start server/
-connectDB();
+// connectDB();
 // connectDB().then(() => {
 //   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 // });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// connect DB before routes
+connectDB().then(() => {
+  console.log("DB connected, starting server...");
+
+  // Routes
+  app.use("/webhook", webhookRoutes);
+
+  // Start server only after DB is connected
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+});
