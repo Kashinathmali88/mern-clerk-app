@@ -29,21 +29,6 @@ app.get("/api/protected", requireAuth(), (req, res) => {
 });
 
 // connect DB first, then start server/
-// connectDB();
-// connectDB().then(() => {
-//   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-// });
+connectDB();
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// connect DB before routes
-connectDB().then(() => {
-  console.log("DB connected, starting server...");
-
-  // Routes
-  app.use("/webhook", webhookRoutes);
-
-  // Start server only after DB is connected
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
