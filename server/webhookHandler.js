@@ -11,6 +11,7 @@ router.post(
   async (req, res) => {
     try {
       const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+
       // const evt = wh.verify(req.body, req.headers);
 
       const payload = req.body.toString("utf8"); // convert Buffer → string
@@ -36,7 +37,8 @@ router.post(
             email: evt.data.email_addresses[0]?.email_address,
             firstName: evt.data.first_name,
             lastName: evt.data.last_name,
-          }
+          },
+          { new: true }
         );
       }
 
