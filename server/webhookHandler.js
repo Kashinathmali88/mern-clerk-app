@@ -25,6 +25,10 @@ router.post(
         });
       }
 
+      if (evt.type === "user.deleted") {
+        await User.findOneAndDelete({ clerkId: evt.data.id });
+      }
+
       if (evt.type === "user.updated") {
         await User.findOneAndUpdate(
           { clerkId: evt.data.id },
